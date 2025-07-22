@@ -1,9 +1,22 @@
-import {WebSocketServer, WebSocket} from 'ws'
+import  {WebSocketServer, WebSocket} from 'ws'
 
-const wss = new WebSocketServer({ port: 8080 })
+const wss = new WebSocketServer({ port: parseInt(process.env.PORT!) || 8080 })
 const rooms = new Map<Number, WebSocket[]>()
 const wsRooms = new Map<WebSocket, Number>()
 
+const relayer_ws = new WebSocket('ws://localhost:3000')
+
+relayer_ws.onmessage = (message) => {
+    console.log("Message from relayer", message.data.toString())
+    const messageObj = JSON.parse(message.data.toString())
+    console.log("Sending message to room", wsRooms.get(messageObj.from))
+    rooms.get(messageObj.from!)?.forEach((client) => {
+        console.log("Sending message to client", client)
+        client.send(JSON.stringify(messageObj), {
+            binary: false
+        })
+    })
+}
 wss.on('connection', (ws) => {
 
     ws.on('message', (message: string) => {
@@ -16,6 +29,7 @@ wss.on('connection', (ws) => {
                 rooms.set(messageObj.roomId, [ws])
                 wsRooms.set(ws, messageObj.roomId)  
             }
+            console.log("Joined room", messageObj.roomId , "with", rooms.get(messageObj.roomId))
         }
         if(messageObj.type == "message"){
             if(wsRooms.has(ws)){
@@ -28,6 +42,13 @@ wss.on('connection', (ws) => {
                     })
                 })
             }
+            const relayMsg = JSON.stringify({
+                ...messageObj,
+                from: wsRooms.get(ws)
+            })
+            relayer_ws.send(relayMsg, {
+                binary: false
+            })
         }
 
     })
@@ -35,5 +56,5 @@ wss.on('connection', (ws) => {
 
 
 wss.on('listening', () => {
-    console.log('listening on port 8080')
+    console.log(`listening on port ${process.env.PORT} `)
 })
