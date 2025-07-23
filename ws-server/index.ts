@@ -18,7 +18,7 @@ relayer_ws.onmessage = (message) => {
     })
 }
 wss.on('connection', (ws) => {
-
+    console.log("Socket connected to server", process.env.PORT)
     ws.on('message', (message: string) => {
         const messageObj = JSON.parse(message)
         if(messageObj.type == "joinRoom"){
