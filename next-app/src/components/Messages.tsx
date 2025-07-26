@@ -15,48 +15,6 @@ function Messages({ chat, user }: { chat: Chat, user: User }) {
                 );
             })
             }
-            {chat?.messages?.map((message) => {
-                return (
-                   <MessageBubble key={message.id} user={user} message={message} />
-                );
-            })
-            }
-            {chat?.messages?.map((message) => {
-                return (
-                   <MessageBubble key={message.id} user={user} message={message} />
-                );
-            })
-            }
-            {chat?.messages?.map((message) => {
-                return (
-                   <MessageBubble key={message.id} user={user} message={message} />
-                );
-            })
-            }
-            {chat?.messages?.map((message) => {
-                return (
-                   <MessageBubble key={message.id} user={user} message={message} />
-                );
-            })
-            }
-            {chat?.messages?.map((message) => {
-                return (
-                   <MessageBubble key={message.id} user={user} message={message} />
-                );
-            })
-            }
-            {chat?.messages?.map((message) => {
-                return (
-                   <MessageBubble key={message.id} user={user} message={message} />
-                );
-            })
-            }
-            {chat?.messages?.map((message) => {
-                return (
-                   <MessageBubble key={message.id} user={user} message={message} />
-                );
-            })
-            }
         </div>
     )
 }

@@ -8,7 +8,7 @@ function MessageBubble({ message, user }: { message: Message, user: User }) {
         'en-IN',
     ], { hour: '2-digit', minute: '2-digit' }) : '';
     return (
-        <div key={message.id} className={`flex ${isSent ? 'justify-end' : 'justify-start'}`}>
+        <div key={message.id} className={`my-1 flex ${isSent ? 'justify-end' : 'justify-start'}`}>
             <div className={`flex items-end gap-2 max-w-[70%] ${isSent ? 'flex-row-reverse' : ''}`}>
                 <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-sm font-bold text-foreground">
                     {initials}

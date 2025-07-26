@@ -16,7 +16,8 @@ async function Home({params}:{params:{chatId:string}}) {
     
     return (
         <div className='lg:grid grid-cols-12 h-screen'>
-          <div className='col-span-3 border h-full overflow-auto chat-list'>
+          <div className='col-span-3 border  chat-list'>
+          
             <ChatList selectedChatId={chatId} user={session.user as User}/>
           </div>
           <div className='col-span-9 border h-full'><MainContent user={session.user as User} chatId={chatId}/></div>
