@@ -189,9 +189,9 @@ export const chatsWithMessages:Chat[] = chats.map(chat => {
       },
       {
         id: '3',
-        sender: chat.lastMessage.sender,
-        text: chat.lastMessage.text,
-        createdAt: chat.lastMessage.createdAt,
+        sender: chat.lastMessage?.sender || userA,
+        text: chat.lastMessage?.text || '',
+        createdAt: chat.lastMessage?.createdAt || new Date(),
       },
     ],
   };

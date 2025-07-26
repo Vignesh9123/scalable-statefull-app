@@ -1,13 +1,17 @@
 import { MessageCircleDashed } from "lucide-react"
-import { chatsWithMessages } from "@/data/mock"
-import { User } from "@/types";
+import { Chat, User } from "@/types";
 import Messages from "./Messages";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-
-function MainContent({chatId,user}:{chatId?:string, user:User}) {
-    const chat = chatsWithMessages.find(chat => chat.id === chatId);
-
+import { fetchChat } from "@/app/actions";
+import { auth } from "@/auth";
+import { headers } from "next/headers";
+async function MainContent({chatId}:{chatId?:string}) {
+  const chat = chatId ? await fetchChat(chatId!): null;
+  const session = await auth.api.getSession({
+      headers: await headers()
+  })
+  const user = session?.user as User
   return (
     <>
       {!chatId && <div className='flex flex-col items-center justify-center h-full p-3'>

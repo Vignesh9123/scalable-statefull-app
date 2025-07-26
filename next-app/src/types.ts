@@ -2,13 +2,13 @@ export interface User {
     id: string;
     name: string;
     email: string;
-    image?: string;
+    image: string | null;
 }
 
 export interface Chat {
     id: string;
     participants: User[];
-    lastMessage: Message;
+    lastMessage: Message | null;
     messages?: Message[];
     unreadCount?: number;
     unreadBy?: String;
