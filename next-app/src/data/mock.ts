@@ -167,35 +167,7 @@ export const chats:Chat[] = [
         text: "Hi Henry, I sent the document.",
         createdAt: new Date(),
       },
-    },
-    {
-      id: "7",
-      participants: [
-        {
-          id: "11",
-          name: "Henry Ford",
-          image: "",
-          email: "henry@ford",
-        },
-        {
-          id: "A0COQIscdQ9hhKriEnEtUyJYnvbdDwuC",
-          name: "Vignesh D",
-          image: "",
-          email: "vignesh.d9123@gmail.com",
-        },
-      ],
-      lastMessage: {
-        id: "1",
-        sender: {
-          id: "A0COQIscdQ9hhKriEnEtUyJYnvbdDwuC",
-          name: "Vignesh D",
-          image: "",
-          email: "vignesh.d9123@gmail.com",
-        },
-        text: "Hi Henry, I sent the document.",
-        createdAt: new Date(),
-      },
-    },
+    }
 ]
 
 export const chatsWithMessages:Chat[] = chats.map(chat => {

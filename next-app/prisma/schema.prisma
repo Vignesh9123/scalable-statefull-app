@@ -24,6 +24,8 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  chats         Chat[] @relation(name: "ChatParticipants")
+  messages      Message[]
 
   @@unique([email])
   @@map("user")
@@ -72,4 +74,26 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model Chat{
+  id String @id
+  participants User[] @relation(name: "ChatParticipants")
+  lastMessageId String? @unique
+  lastMessage Message? @relation(name: "LastMessage",fields: [lastMessageId], references: [id], onDelete: SetNull) 
+  messages Message[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Message{
+  id String @id
+  senderId String
+  sender User @relation(fields: [senderId], references: [id])
+  text String
+  chatId String
+  chat Chat @relation(fields: [chatId], references: [id])
+  chatWithLastMessage Chat? @relation(name: "LastMessage")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
